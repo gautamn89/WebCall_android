@@ -117,13 +117,19 @@ timeout: 20000,
 /*************************** First Pageone Device Ready Event *************************/
 $(document).ready(function(){
 //alert('onDevice ready');
+var string = device.platform;
+
 console.log("Javascript start");
 var db = window.openDatabase("html5.db", "1.0", "PhoneGap Demo", 1000000);
 var autocompletenumber = new Array();
 console.log("onDevice ready");
 var datastatus;
 function checkConnection() {
-var networkState = navigator.connection.type;
+var networkState = null; 
+                var platform = localStorage.getItem("deviceplatform"); 
+                if(platform == "Android"){ var networkState = navigator.connection.type; } 
+                else if(platform == "iOS") { var networkState = Connection.CELL; }
+
 console.log("Inside check connection");
 var states = {};
 states[Connection.UNKNOWN] = '0';
@@ -147,6 +153,13 @@ else {
 //alert("Browser support Html5");
 console.log("Both localStorage and sessionStorage support is there.");
 }
+
+var platform = localStorage.getItem("deviceplatform");
+            if(platform === null ){
+           	platform = window.device.platform;
+           	localStorage.setItem("deviceplatform",platform);
+            }
+            
 //alert('Page one create event');
 console.log('Page one create event');
 var userid = localStorage.getItem("userid");
@@ -325,7 +338,11 @@ for (var i in contacts) {
 if(contacts[i].phoneNumbers != null)
 {
 //below code is to re insert the updated list
-var name = contacts[i].displayName;
+if(contacts[i].displayName == null)
+			               	 				var name = contacts[i].name.givenName + contacts[i].name.familyName;
+			               	 			else
+				               	 			var name = contacts[i].displayName;
+
 var phonenumber = contacts[i].phoneNumbers[0].value;
 console.log("Name" + name);
 console.log("Phonenumber" + phonenumber);
@@ -363,7 +380,10 @@ var li = $("<li>");
 var licls = $("</li>");
 var a = $("<a>");
 var acls = $("</a>");
-a.attr("id", contacts[i].phoneNumbers[0].value).text(contacts[i].displayName);
+if(contacts[i].displayName == null)
+        	            		a.attr("id", contacts[i].phoneNumbers[0].value).text(contacts[i].name.givenName + contacts[i].name.familyName);
+               	 			else
+               	 				a.attr("id", contacts[i].phoneNumbers[0].value).text(contacts[i].displayName);
 a.attr("href", contacts[i].phoneNumbers[0].value);
 $("#contactlist").append(li)
 li.append(a); //apended to li becos we wnad anchor tag inside tthe list
@@ -602,7 +622,10 @@ if(contacts[i].phoneNumbers != null)list
 //below array is for autocomplete in direct call section
 autocompletenumber.push(contacts[i].phoneNumbers[0].value);
 //below code is to re insert the updated list
-var name = contacts[i].displayName;
+if(contacts[i].displayName == null)
+			               	 						var name = contacts[i].name.givenName + contacts[i].name.familyName;
+			               	 					else
+				               	 					var name = contacts[i].displayName;
 var phonenumber = contacts[i].phoneNumbers[0].value;
 console.log("Name" + name);
 console.log("Phonenumber" + phonenumber);
@@ -612,7 +635,11 @@ var li = $("<li>");
 var licls = $("</li>");
 var a = $("<a>");
 var acls = $("</a>");
-a.attr("id", contacts[i].phoneNumbers[0].value).text(contacts[i].displayName);
+if(contacts[i].displayName == null)
+        	            		a.attr("id", contacts[i].phoneNumbers[0].value).text(contacts[i].name.givenName + contacts[i].name.familyName);
+               	 			else
+               	 				a.attr("id", contacts[i].phoneNumbers[0].value).text(contacts[i].displayName);
+
 a.attr("href", contacts[i].phoneNumbers[0].value);
 $("#contactlist").append(li)
 li.append(a); //apended to li becos we wnad anchor tag inside tthe list
@@ -786,7 +813,12 @@ $.mobile.changePage($("#pageLoginPage"), { transition : "slide"});
 } // else close network status
 }// onLgSubmit close
 function checkConnection() {
-var networkState = navigator.connection.type;
+  var networkState = null;
+  var platform = localStorage.getItem("deviceplatform");
+                    if(platform == "Android"){ 
+                    	var networkState = navigator.connection.type; 
+                    	} else if(platform == "iOS") { 
+                    		var networkState = Connection.CELL; }
 var states = {};
 states[Connection.UNKNOWN] = '0';
 states[Connection.NONE] = '1';
@@ -1020,7 +1052,13 @@ alert("No User Name found \n please login");
 }// else close for network status
 }//onRegisterClick close
 function checkConnection() {
-var networkState = navigator.connection.type;
+  
+  var networkState = null;
+  var platform = localStorage.getItem("deviceplatform");
+                    if(platform == "Android"){ 
+                    	var networkState = navigator.connection.type; 
+                    	} else if(platform == "iOS") { 
+                    		var networkState = Connection.CELL; }
 var states = {};
 states[Connection.UNKNOWN] = '0';
 states[Connection.NONE] = '1';
@@ -1169,7 +1207,15 @@ alert("Unable to get username \n Please login ");
 }// else close for network stataus
 }// onSettingsRetriveClick
 function checkConnection() {
-var networkState = navigator.connection.type;
+  var networkState = null; 
+                   var platform = localStorage.getItem("deviceplatform"); 
+                   if(platform == "Android"){ 
+                	   var networkState = navigator.connection.type; 
+                	   } else if(platform == "iOS") 
+                	   { 
+                		   var networkState = Connection.CELL; 
+                	   }
+
 var states = {};
 states[Connection.UNKNOWN] = '0';
 states[Connection.NONE] = '1';
@@ -1256,7 +1302,14 @@ alert("Cannot Make Call Insufficient parameters");
 }// else closing for network status
 }); //recentlydialedlistdiv click event close
 function checkConnection() {
-var networkState = navigator.connection.type;
+  var networkState = null; 
+                   var platform = localStorage.getItem("deviceplatform"); 
+                   if(platform == "Android"){ 
+                	   var networkState = navigator.connection.type; 
+                	   } else if(platform == "iOS") 
+                	   { 
+                		   var networkState = Connection.CELL; 
+                	   }
 var states = {};
 states[Connection.UNKNOWN] = '0';
 states[Connection.NONE] = '1';
@@ -1471,7 +1524,15 @@ $('#dialednumber').val(dialednumber);
 });
 }
 function checkConnection() {
-var networkState = navigator.connection.type;
+  var networkState = null; 
+                   var platform = localStorage.getItem("deviceplatform"); 
+                   if(platform == "Android"){ 
+                	   var networkState = navigator.connection.type; 
+                	   } else if(platform == "iOS") 
+                	   { 
+                		   var networkState = Connection.CELL; 
+                	   }
+
 var states = {};
 states[Connection.UNKNOWN] = '0';
 states[Connection.NONE] = '1';
@@ -1583,7 +1644,14 @@ $("#creditdetails").text(creditdetails);
 }
 }// function PageReady close
 function checkConnection() {
-var networkState = navigator.connection.type;
+  var networkState = null; 
+                   var platform = localStorage.getItem("deviceplatform"); 
+                   if(platform == "Android"){ 
+                	   var networkState = navigator.connection.type; 
+                	   } else if(platform == "iOS") 
+                	   { 
+                		   var networkState = Connection.CELL; 
+                	   }
 var states = {};
 states[Connection.UNKNOWN] = '0';
 states[Connection.NONE] = '1';
