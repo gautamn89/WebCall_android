@@ -116,14 +116,14 @@
 	</feature>
    
 
-    <!-- Deprecated plugins element. Remove in 3.0 -->
+    <!-- Deprecated plugins element. Remove in 3.0
    
     <feature name="Contacts">
     <param name="ios-package" value="CDVContacts" />
     </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
-    </feature>
+    </feature> -->
     
     <platform name="ios">
         <preference name="Fullscreen" value="true" />
