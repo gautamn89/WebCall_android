@@ -118,6 +118,7 @@
    <feature name="Contacts">
     <param name="ios-package" value="CDVContacts" />
     </feature>
-   
+    
+   <plugin name="Contacts" value="org.apache.cordova.ContactManager" />
     
 </widget>
