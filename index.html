@@ -1238,9 +1238,13 @@ console.log("Inside pagerecentcontact");
 console.log("Inside pagerecentcontact");
 document.addEventListener("deviceready", onPaddingHeader, false);
 function onPaddingHeader() {
-	if (parseFloat(window.device.version) >= 7.0) {
-          document.body.style.marginTop = "20px";
+	if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
+		console.log(" Page Recently Dialed Adding margin to the header");
+		alert("Adding margin");
+        document.body.style.marginTop = "20px";
+        	console.log(" Page Recently Dialed after adding margin to the header");
     }
+	
 }
 // below function is called when the contact in the contactlist is clicked
 $("#recentlydialedlistdiv").on("click", 'a' , function(event){
@@ -1589,6 +1593,7 @@ $('#recentlydialed-right-setting-popup').popup("open");
 });
 var ThisPage = $(':mobile-pagecontainer').pagecontainer('getActivePage').attr('id');
 if(ThisPage == "pageSettings"){ // this condition checks for which page show event is triggered
+
 console.log("Inside pagesetting containershow event"); //becos pageshow event is deprecated
 //alert("Inside pageSettings show event");
 document.addEventListener("deviceready", onPageReady, false);
@@ -1704,6 +1709,13 @@ recently_dialed_array.reverse(); // so that the shift() function called if size 
 }
 }
 else if (ThisPage == "pageContactList"){
+	
+	if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
+			console.log(" Page contactlist Adding margin to the header");
+		alert("Adding margin");
+        document.body.style.marginTop = "20px";
+    }
+
 /** **/
 //$('#contactlist-right-setting-popup').popup('reposition', 'positionTo: #contentdiv');
 //$('#contactlist-right-setting-popup').popup("open");
@@ -1936,8 +1948,6 @@ navigator.device.exitApp();
 </div>
 </div>
 <div data-role="page" id="pageRecentlyDialed" data-title="Recent" >
-<div data-role="header" data-position="fixed" class="ui-alt-icon">
-</div>
 <div data-role="header" data-position="fixed" class="ui-alt-icon">
 <h2>Recent</h2>
 <a id="a_recentlydialed_menu" href="#recentlydialed-right-setting-popup" data-rel="popup" data-transition="slidedown" class="ui-btn ui-btn-right ui-shadow ui-corner-all ui-icon-gear ui-btn-icon-notext" data-role="button" title="Menu">Menu</a>
