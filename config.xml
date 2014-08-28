@@ -122,4 +122,5 @@
    <plugin name="Contacts" value="org.apache.cordova.ContactManager" />
    <plugin name="Contacts" value="CDVContacts" />
     
+    <plugin name="Storage" value="org.apache.cordova.Storage" />
 </widget>
