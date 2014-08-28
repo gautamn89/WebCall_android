@@ -329,10 +329,11 @@
    			                      			//alert("Retriving Contact from mobile");
    			                      			console.log("Retriving Contact from mobile");
 	   			                      		var options = new ContactFindOptions();
+	   			                      		console.log("After creating options");
 	   			                         	options.filter="";          // empty search string returns all contacts
 	   			                         	options.multiple=true;      // return multiple results
 	   			                         	var filter = ["displayName" , "name" , "phoneNumbers"];   // return contact.displayName field
-	   			                            
+	   			                            	console.log("After setting contact filter");
 	   			                         	// below line is use to find contacts
       			                        	 navigator.contacts.find(filter, onContactSuccess, onContactError, options);
    			                      		
@@ -456,6 +457,7 @@
             //
             function onContactError(contactError) {
                 alert('Error in getting contacts!');
+                console.log("Error in getting contacts for frist time");
             }
                      
             // below function is called when the contact in the contactlist is clicked
