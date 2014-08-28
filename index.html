@@ -166,7 +166,7 @@
                return states[networkState];
             }
         	
-			document.addEventListener("deviceready", onDeviceReady, false);
+		document.addEventListener("deviceready", onDeviceReady, false);
             
             function onDeviceReady() {
             	console.log("Inside first onDevice ready");
@@ -338,16 +338,35 @@
       			                        	 navigator.contacts.find(filter, onContactSuccess, onContactError, options);
    			                      			console.log("navigator.contacts.find worked");
  		
- 		function onContactSuccess(contacts) {
-            	
+         
+   			                      		}
+   			                        	
+   		                  		  }
+   		                  	  else {
+   		                   		$.mobile.changePage($("#pageone"), { transition : "slide"});
+   		                  	  }
+   		                 	}// onsucess close
+   		                 
+   		    			}// else closing for  network status
+    		        }// else closing for login check if  user is not first time visitor
+   		      // onSuccess: Get a snapshot of the current contacts
+            //
+           
+            }// onDeviceReady close
+
+         //**** contactsuccess was added here 
+          function onContactSuccess(contacts) {
+            	console.log("inside contact success");
             	var contactstest = contacts;
-            	$("#contactlist").empty();     
+            	$("#contactlist").empty();    
+            	console.log("contact list emptied");
             	db.transaction(populateDB, errorCB, successCB);
 					
                  function populateDB(tx) {
+                	console.log("Inside populateDB ");
                      tx.executeSql('DROP TABLE IF EXISTS CONTACTS');
                      tx.executeSql('CREATE TABLE IF NOT EXISTS CONTACTS (id unique, name, phoneNumber)');
-                     console.log("Inside populateDB ");
+                    
                      //db.transaction(getCB, errorCB);
                 }
 
@@ -360,10 +379,9 @@
                  //
                  function successCB() {
                      //alert("success!");
-                     
-                     localStorage.setItem("database_created", "1"); 
                      console.log("database created");
-                 }
+                     localStorage.setItem("database_created", "1"); 
+                     }
                  
                  var database_created = localStorage.getItem("database_created");
                  var database_populated = localStorage.getItem("database_populated");
@@ -397,6 +415,7 @@
 		               	 		function contactInsert(name,phonenumber){
 			               	 		//alert(name);
 			               	 		//alert(phonenumber);
+			               	 		console.log("Inserting contact");
 			               	 		db.transaction( function(tx){ tx.executeSql('INSERT INTO CONTACTS (name, phoneNumber) VALUES ("' +  name + '", "' + phonenumber + '")' )}, insertErrorCB, insertSuccessCB);  
 		               	 		}
 
@@ -444,23 +463,7 @@
             function onContactError(contactError) {
                 alert('Error in getting contacts!');
                 console.log("Error in getting contacts for frist time");
-            }               
-   			                      		}
-   			                        	
-   		                  		  }
-   		                  	  else {
-   		                   		$.mobile.changePage($("#pageone"), { transition : "slide"});
-   		                  	  }
-   		                 	}// onsucess close
-   		                 
-   		    			}// else closing for  network status
-    		        }// else closing for login check if  user is not first time visitor
-   		      // onSuccess: Get a snapshot of the current contacts
-            //
-           
-            }// onDeviceReady close
-
-         //**** contactsuccess was added here 
+            }      
                      
             // below function is called when the contact in the contactlist is clicked
             $("#contactlistdiv").on("click", 'a' , function(event){
