@@ -1240,8 +1240,8 @@ document.addEventListener("deviceready", onPaddingHeader, false);
 function onPaddingHeader() {
 	if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
 		console.log(" Page Recently Dialed Adding margin to the header");
-		alert("Adding margin");
-        document.body.style.marginTop = "20px";
+		//alert("Adding margin");
+        document.body.style.marginTop = "80px";
         	console.log(" Page Recently Dialed after adding margin to the header");
     }
 	
@@ -1712,8 +1712,8 @@ else if (ThisPage == "pageContactList"){
 	
 	if (device.platform === 'iOS' && parseFloat(device.version) >= 7.0) {
 			console.log(" Page contactlist Adding margin to the header");
-		alert("Adding margin");
-        document.body.style.marginTop = "20px";
+		//alert("Adding margin");
+        document.body.style.marginTop = "80px";
     }
 
 /** **/
@@ -1883,9 +1883,6 @@ navigator.device.exitApp();
 </div>
 <!-- Page Five i.e Setting Page-->
 <div data-role="page" id="pageSettings" data-title="Settings" >
-<div data-role="header" data-position="fixed" class="ui-alt-icon">
-<h6>........</h6>
-</div>
 <div data-role="header" data-position="fixed" class="ui-alt-icon">
 <a id="a_back" href="#" data-rel="back" class="ui-btn ui-shadow ui-btn-left ui-corner-all ui-btn-icon-notext ui-icon-carat-l">Back</a>
 <h1>Settings</h1>
