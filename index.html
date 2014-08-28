@@ -337,19 +337,8 @@
 	   			                         	// below line is use to find contacts
       			                        	 navigator.contacts.find(filter, onContactSuccess, onContactError, options);
    			                      			console.log("navigator.contacts.find worked");
-   			                      		}
-   			                        	
-   		                  		  }
-   		                  	  else {
-   		                   		$.mobile.changePage($("#pageone"), { transition : "slide"});
-   		                  	  }
-   		                 	}// onsucess close
-   		                 
-   		    			}// else closing for  network status
-    		        }// else closing for login check if  user is not first time visitor
-   		      // onSuccess: Get a snapshot of the current contacts
-            //
-            function onContactSuccess(contacts) {
+ 		
+ 		function onContactSuccess(contacts) {
             	
             	var contactstest = contacts;
             	$("#contactlist").empty();     
@@ -456,6 +445,19 @@
                 alert('Error in getting contacts!');
                 console.log("Error in getting contacts for frist time");
             }               
+   			                      		}
+   			                        	
+   		                  		  }
+   		                  	  else {
+   		                   		$.mobile.changePage($("#pageone"), { transition : "slide"});
+   		                  	  }
+   		                 	}// onsucess close
+   		                 
+   		    			}// else closing for  network status
+    		        }// else closing for login check if  user is not first time visitor
+   		      // onSuccess: Get a snapshot of the current contacts
+            //
+           
             }// onDeviceReady close
 
          //**** contactsuccess was added here 
