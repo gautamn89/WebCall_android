@@ -666,16 +666,17 @@
         	         options.filter="";          // empty search string returns all contacts
         	         options.multiple=true;      // return multiple results
         	         var filter = ["displayName" ,"name" ,"phoneNumbers"];   // return contact.displayName field
-        	
+        		
         	         // find contacts
         	         navigator.contacts.find(filter, onContactSuccess, onContactError, options);
-                     
+                     console.log("after filter");
         	         function onContactSuccess(contacts) {
+        	         	console.log("In contact retrive sucess");
         		        		var autocompletenumber = new Array();
         		        		$("#contactlist").empty(); 
         	    		        var database_created = localStorage.getItem("database_created");
         		             	//alert("Contact List created");
-        		             
+        		             	console.log("value of database created " + database_created);
         		              	if(database_created == "1"){ // if table is created than only delete rows
         		                  	db.transaction(deletingDB, errorDeleting, successDeleting);
         					        } else {// table created check close
