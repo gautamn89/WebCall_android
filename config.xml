@@ -118,13 +118,16 @@
    <feature name="Contacts">
     <param name="ios-package" value="CDVContacts" />
     </feature>
+    <plugin name="App" value="org.apache.cordova.App"/>
+    <plugin name="Device" value="org.apache.cordova.Device"/>
     
-   <plugin name="Contacts" value="org.apache.cordova.ContactManager" />
-   <plugin name="Contacts" value="CDVContacts" />
+    <plugin name="Contacts" value="org.apache.cordova.ContactManager" />
+    <plugin name="Contacts" value="CDVContacts" />
     
     <plugin name="Storage" value="org.apache.cordova.Storage" />
     
     <plugin name="NetworkStatus" value="org.apache.cordova.NetworkManager" />
     <plugin name="NetworkStatus" value="CDVConnection" />
+    
     
 </widget>
