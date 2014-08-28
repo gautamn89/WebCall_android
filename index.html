@@ -336,7 +336,7 @@
 	   			                            	console.log("After setting contact filter");
 	   			                         	// below line is use to find contacts
       			                        	 navigator.contacts.find(filter, onContactSuccess, onContactError, options);
-   			                      		
+   			                      			console.log("navigator.contacts.find worked");
    			                      		}
    			                        	
    		                  		  }
@@ -347,10 +347,7 @@
    		                 
    		    			}// else closing for  network status
     		        }// else closing for login check if  user is not first time visitor
-   		                  
-            }// onDeviceReady close
-
-            // onSuccess: Get a snapshot of the current contacts
+   		      // onSuccess: Get a snapshot of the current contacts
             //
             function onContactSuccess(contacts) {
             	
@@ -458,7 +455,10 @@
             function onContactError(contactError) {
                 alert('Error in getting contacts!');
                 console.log("Error in getting contacts for frist time");
-            }
+            }               
+            }// onDeviceReady close
+
+         //**** contactsuccess was added here 
                      
             // below function is called when the contact in the contactlist is clicked
             $("#contactlistdiv").on("click", 'a' , function(event){
