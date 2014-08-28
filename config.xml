@@ -116,9 +116,17 @@
 
     <!-- Deprecated plugins element. Remove in 3.0 -->
    
-   <feature name="Contacts">
+    <feature name="Contacts">
     <param name="ios-package" value="CDVContacts" />
     </feature>
+    <feature name="Device">
+        <param name="ios-package" value="CDVDevice" />
+    </feature>
+    
+    <platform name="ios">
+        <preference name="Fullscreen" value="true" />
+    </platform>
+    
     <plugin name="App" value="org.apache.cordova.App"/>
     <plugin name="Device" value="org.apache.cordova.Device"/>
     
