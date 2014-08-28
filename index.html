@@ -1119,7 +1119,12 @@ alert("Unable to get userid..\n. Please Reload the app");
 $(document).on('pagecreate', '#pageSettings', function(){
 console.log("Inside pageonesettings");
 console.log("Inside pageonesettings");
-//document.addEventListener("deviceready", onPageReady, false);
+document.addEventListener("deviceready", onPaddingHeader, false);
+function onPaddingHeader() {
+	if (parseFloat(window.device.version) === 7.0) {
+          document.body.style.marginTop = "20px";
+    }
+}
 console.log("Inside pageonesettings after deviceready ");
 $( "#sel_settings_register_num" ).change(function() {
 //alert("select event trriged");
@@ -1231,6 +1236,12 @@ return states[networkState];
 $(document).on('pagecreate', '#pageRecentlyDialed', function(){
 console.log("Inside pagerecentcontact");
 console.log("Inside pagerecentcontact");
+document.addEventListener("deviceready", onPaddingHeader, false);
+function onPaddingHeader() {
+	if (parseFloat(window.device.version) >= 7.0) {
+          document.body.style.marginTop = "20px";
+    }
+}
 // below function is called when the contact in the contactlist is clicked
 $("#recentlydialedlistdiv").on("click", 'a' , function(event){
 //alert("Contact Selected");
