@@ -40,6 +40,9 @@
     <preference name="orientation" value="portrait" />
     <preference name="permissions" value="none" />
     <preference name="Fullscreen" value="true" />
+    
+    <gap:plugin name="com.phonegap.plugin.statusbar" version="1.1.0" />
+   <preference name="StatusBarOverlaysWebView" value="false" />
     <!--
       <preference name="splashscreen" value="resourceName" />
       <preference name="backgroundColor" value="0xFFF" />
