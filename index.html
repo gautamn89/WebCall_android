@@ -617,12 +617,12 @@ localStorage.setItem("database_populated", "0");
 // below for loop create list along with insering the database with updated contacts
 for (var i=0; i<=contacts.length; i++) {
 if (contacts === null) continue;
-if(contacts[i].phoneNumbers != null)list
+if(contacts[i].phoneNumbers != null)
 {
 //below array is for autocomplete in direct call section
 autocompletenumber.push(contacts[i].phoneNumbers[0].value);
 //below code is to re insert the updated list
-if(contacts[i].displayName == null)
+if(contacts[i].displayName === null)
 			               	 						var name = contacts[i].name.givenName + contacts[i].name.familyName;
 			               	 					else
 				               	 					var name = contacts[i].displayName;
