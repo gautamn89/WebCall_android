@@ -1709,7 +1709,24 @@ else{
 }
 
 
+
+
 }// function PageReady close
+
+$(document).on("click", "#boxcall", function () {
+//$('').attr('checked', this.checked);
+alert("Box call clicked");
+console.log("Box call clicked");
+if(this.attr('checked')){
+localStorage.setItem("boxcall", "1");
+console.log("Box call value set to 1");
+}
+else{
+localStorage.setItem("boxcall", "0");
+console.log("Box call value set to 0");
+}
+});
+
 function checkConnection() {
   var networkState = null; 
                    var platform = localStorage.getItem("deviceplatform"); 
