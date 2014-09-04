@@ -667,19 +667,21 @@ $.mobile.changePage("#pageLogin");
 }
 });
 
-/** $(document).on("click", "#boxcall", function () {
+$(document).on("click", "#boxcall", function () {
           //$('').attr('checked', this.checked);
           alert("Box call clicked");
           console.log("Box call clicked");
           if(this.attr('checked')){
           	localStorage.setItem("boxcall", "1");
           	console.log("Box call value set to 1");
+          	alert("Box call value set to 1");
           }
           else{
           	localStorage.setItem("boxcall", "0");
           	console.log("Box call value set to 0");
+          	alert("Box call value set to 0");
           }
-    });**/
+    });
 
 }); // ondocument ready close
 /*** ***************************************************
