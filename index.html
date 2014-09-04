@@ -665,6 +665,21 @@ localStorage.clear();
 $.mobile.changePage("#pageLogin");
 }
 });
+
+ $("#boxcall").click(function () {
+          //$('').attr('checked', this.checked);
+          alert("Box call clicked");
+          console.log("Box call clicked");
+          if(this.attr('checked')){
+          	localStorage.setItem("boxcall", "1");
+          	console.log("Box call value set to 1");
+          }
+          else{
+          	localStorage.setItem("boxcall", "0");
+          	console.log("Box call value set to 0");
+          }
+    });
+
 }); // ondocument ready close
 /*** ***************************************************
 **
@@ -897,6 +912,7 @@ console.log("test");
 var userid = localStorage.getItem("userid");
 var callerid = localStorage.getItem("caller_id");
 var domainname = localStorage.getItem("domainname");
+var boxcall = localStorage.getItem("boxcall");
 var dest = $('#phone_num').val();
 var destnum = $.trim($('#phone_num').val()); // note when no value is entered the it does not passes null but some garbage so 'destnum !== null' will set to true instead use destnum != ""
 //alert("userid" + userid);
@@ -936,7 +952,7 @@ $.ajax({
 type: "GET",
 url: "http://mail.tsim.in/webcall.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
-data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum},
+data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum,box_call: boxcall},
 cache: false,
 dataType: 'json',
 success : function(data){
@@ -1258,6 +1274,7 @@ alert("No Data Network found");
 var userid = localStorage.getItem("userid");
 var callerid = localStorage.getItem("caller_id");
 var domainname = localStorage.getItem("domainname");
+var boxcall = localStorage.getItem("boxcall");
 var destnum = $(this).attr('href').match(/([0-9])/g).join(''); // the match function extracts number put it in an array
 console.log("recentlydialedlist Div:userid " + userid);
 console.log("recentlydialedlist Div:callerid " + callerid);
@@ -1286,7 +1303,7 @@ $.ajax({
 type: "GET",
 url: "http://mail.tsim.in/webcall.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
-data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum},
+data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum,box_call: boxcall},
 cache: false,
 dataType: 'json',
 success : function(data){
@@ -1441,6 +1458,7 @@ console.log("test");
 var userid = localStorage.getItem("userid");
 var callerid = localStorage.getItem("caller_id");
 var domainname = localStorage.getItem("domainname");
+var boxcall = localStorage.getItem("boxcall");
 var dest = $('#dialednumber').val();
 var destnum = $.trim($('#dialednumber').val()); // note when no value is entered the it does not passes null but some garbage so 'destnum !== null' will set to true instead use destnum != ""
 //alert("userid" + userid);
@@ -1484,7 +1502,7 @@ $.ajax({
 type: "GET",
 url: "http://mail.tsim.in/webcall.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
-data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum},
+data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum,box_call: boxcall},
 cache: false,
 dataType: 'json',
 success : function(data){
@@ -1658,6 +1676,19 @@ var creditdetails = localStorage.getItem("credit_details")
 if(creditdetails != null ){
 $("#creditdetails").text(creditdetails);
 }
+
+var boxcall = localStorage.getItem("boxcall");
+
+if(boxcall === null || boxcall == "1"){
+	console.log("box call checked");
+	$("#boxcall").attr("checked","checked");
+}
+else{
+	$("#boxcall").removeAttr("checked");
+	console.log("box call unchecked");
+}
+
+
 }// function PageReady close
 function checkConnection() {
   var networkState = null; 
@@ -1893,13 +1924,13 @@ navigator.device.exitApp();
 <form id=frm_settings>
 <div data-role="fieldcontain">
 <div style="display: inline;">
-<label for="username"style="float:left;" >User Name </label>
+<label for="username"style="display: block; float:left;" >User Name </label>
 <label id="settings_userid" style="float:right;">NA</label>
 </div>
 </div>
 <div data-role="fieldcontain" >
 <div style="display: inline;">
-<label for="Domain Name" style="float:left;">Domain Name</label>
+<label for="Domain Name" style="display: block; float:left;">Domain Name</label>
 <label id="settings_domainname" style="float:right;">tsim.in</label>
 </div>
 </div>
@@ -1926,8 +1957,12 @@ navigator.device.exitApp();
 </div>
 </div>
 <div data-role="fieldcontain" style="overflow: hidden;">
-<label for="Balance Details:" style="display: block; float:left; text-align:left;" >Balance Details</label>
+<label for="Balance Details:" style="display: block; float:left; text-align:left;" >Balance Details:</label>
 <label id="creditdetails" style="display: block; float:right; ">0.00</label>
+</div>
+<div data-role="fieldcontain" style="overflow: hidden;">
+<label for="Call From Box" style="display: block; float:left; text-align:left;" >Call From Box:</label>
+<input name="boxcall" id="boxcall" value="boxcall" style="display: block; float:right;">
 </div>
 <!-- <div data-role="panel" id="settings-right-setting-panel" data-position="right" data-display="overlay" data-position-fixed="true" >
 <h2>Settings</h2>
