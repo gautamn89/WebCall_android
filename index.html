@@ -869,6 +869,26 @@ $.mobile.changePage($("#pageDialPad"), { transition : "slide"});
 });
 });
 /********************************************** DOMAIN DIALOG PAGE CLOSE **************/
+
+$(document).on('pagecreate', '#pageSettings',function(){
+
+alert("Page settings created");
+$("#boxcall").click(function () {
+//$('').attr('checked', this.checked);
+alert("Box call clicked");
+console.log("Box call clicked");
+if(this.attr('checked')){
+localStorage.setItem("boxcall", "1");
+console.log("Box call value set to 1");
+}
+else{
+localStorage.setItem("boxcall", "0");
+console.log("Box call value set to 0");
+}
+});
+
+)};
+
 /***************** PAGEDIRECTCALL LOAD STARTS HERE *******************/
 $(document).on('pagecreate', '#pageDirectCall', function(){
 console.log("test1");
