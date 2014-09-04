@@ -185,7 +185,7 @@ navigator.device.exitApp();
 console.log("Sending ajax request with web storage details");
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 //data: {action: 'login',domains: 'tsim.in',web_storage: 'Yes',user_id: userid,passwd: password},
 data: {action: 'login',domains: domainname,web_storage: 'Yes',user_id: userid,passwd: password},
 cache: false,
@@ -441,7 +441,7 @@ if(!(userid === null) && !(callerid === null) && !(destnum === null ) && !(destn
 //alert("Condition Successful");
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
 data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum},
 cache: false,
@@ -521,7 +521,7 @@ if(!(userid === null) && !(callerid === null) && !(destnum === null ) && !(domai
 //alert("Condition Successful");
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
 data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum},
 cache: false,
@@ -950,7 +950,7 @@ if((userid.length > 0 && userid !== null) && (callerid.length > 0 && callerid !=
 //if(!(userid === null) && !(callerid === null) && !(destnum === null )) {
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
 data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum,box_call: boxcall},
 cache: false,
@@ -1006,7 +1006,7 @@ if(userid != null){
 //$("#spinnerdialog").show();
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 data: {action: 'registernumlist',domains : 'tsim.in',user_id : userid},
 cache: false,
 dataType: 'json',
@@ -1179,7 +1179,7 @@ if(userid != null){
 //$("#spinnerdialog").show();
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 data: {action: 'registernumlist',domains : 'tsim.in',user_id : userid},
 cache: false,
 dataType: 'json',
@@ -1301,7 +1301,7 @@ if(!(userid === null) && !(callerid === null) && !(destnum === null ) && !(domai
 //alert("Condition Successful");
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
 data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum,box_call: boxcall},
 cache: false,
@@ -1500,7 +1500,7 @@ if(!(userid === null) && !(callerid === null) && (destnum.length > 0 && destnum 
 //if(!(userid === null) && !(callerid === null) && !(destnum === null )) {
 $.ajax({
 type: "GET",
-url: "http://mail.tsim.in/webcall.php",
+url: "http://mail.tsim.in/webcalltest.php",
 //data: {action: 'call',domains: 'tsim.in',user_id: userid,caller_id: callerid,dest_num: destnum},
 data: {action: 'call',domains: domainname,user_id: userid,caller_id: callerid,dest_num: destnum,box_call: boxcall},
 cache: false,
