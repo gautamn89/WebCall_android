@@ -89,7 +89,7 @@ setTimeout(function(){
 var ThisPage = $(':mobile-pagecontainer').pagecontainer('getActivePage').attr('id');
 console.log("Now showing" + ThisPage);
 if(ThisPage == "pageone"){ // this condition is add so that the loading dialog dosent get higdden if it is the frist page
-console.log("Page one show")
+console.log("Page one show");
 }
 else{
 $.mobile.loading('hide');
@@ -116,7 +116,7 @@ timeout: 20000,
 });
 /*******************************************************************************************************************************/
 /*************************** First Pageone Device Ready Event *************************/
-$(document).onload(function(){
+$(document).ready(function(){
 //alert('onDevice ready');
 var string = device.platform;
 
