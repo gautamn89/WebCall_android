@@ -667,21 +667,6 @@ $.mobile.changePage("#pageLogin");
 }
 });
 
-$(document).on("click", "#boxcall", function () {
-          //$('').attr('checked', this.checked);
-          alert("Box call clicked");
-          console.log("Box call clicked");
-          if($(this).is(':checked')){
-          	localStorage.setItem("boxcall", "1");
-          	console.log("Box call value set to 1");
-          	alert("Box call value set to 1");
-          }
-          else{
-          	localStorage.setItem("boxcall", "0");
-          	console.log("Box call value set to 0");
-          	alert("Box call value set to 0");
-          }
-    });
 
 }); // ondocument ready close
 /*** ***************************************************
@@ -1175,8 +1160,19 @@ console.log("callerid Local stored");
 //alert("callerid Local stored");
 });
 
+$("input:checkbox[name=boxcall]").change(function() {
+    if($(this).is(':checked')){
+    		localStorage.setItem("boxcall", "1");
+  		console.log("Box call value set to in onBoxClick 1");
+    }
+    else {
+    	localStorage.setItem("boxcall", "0");
+    	console.log("Box call value set to in onBoxClick 0");
+    	alert("Box call value set to in onBoxClick 0");
+    }
+});
 
-
+/**
 $(document).on("click", "#boxcall", function () {
 	document.addEventListener("deviceready", onBoxClick, false);	
 //$('').attr('checked', this.checked);
@@ -1198,7 +1194,7 @@ console.log("Box call value set to in onBoxClick 0");
 alert("Box call value set to in onBoxClick 0");
 }
 }
-
+**/
 
 // BELOW CODE IS TO CONTROL TRANSITION WHEN THE SETTINGS REFRESH BUTTON IS PRESSED //
 $(document).on('click', '#a_refresh', function(){
