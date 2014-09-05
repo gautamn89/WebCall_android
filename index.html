@@ -90,6 +90,7 @@ var ThisPage = $(':mobile-pagecontainer').pagecontainer('getActivePage').attr('i
 console.log("Now showing" + ThisPage);
 if(ThisPage == "pageone"){ // this condition is add so that the loading dialog dosent get higdden if it is the frist page
 console.log("Page one show");
+$(document).fire('_page_ready');
 }
 else{
 $.mobile.loading('hide');
@@ -144,6 +145,7 @@ return states[networkState];
 }
 document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
+	
 console.log("Inside first onDevice ready");
 var datastatus = checkConnection();
 if (typeof(Storage) == "undefined" ) {
