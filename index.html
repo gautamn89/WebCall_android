@@ -116,7 +116,7 @@ timeout: 20000,
 });
 /*******************************************************************************************************************************/
 /*************************** First Pageone Device Ready Event *************************/
-$(document).ready(function(){
+$(document).onload(function(){
 //alert('onDevice ready');
 var string = device.platform;
 
@@ -1971,10 +1971,9 @@ navigator.device.exitApp();
 </div>
 <div data-role="main" id="mainone" class="ui-content" >
 <form id=frm_settings>
-<div data-role="fieldcontain">
-<div style="display: inline;">
+<div data-role="fieldcontain" style="overflow: hidden;">
 <label for="username"style="display: block; float:left;" >User Name </label>
-<label id="settings_userid" style="float:right;">NA</label>
+<label id="settings_userid" style="display: block; float:right;">NA</label>
 </div>
 </div>
 <div data-role="fieldcontain" style="overflow: hidden;">
@@ -2009,7 +2008,7 @@ navigator.device.exitApp();
 </div>
 <div data-role="fieldcontain" style="overflow: hidden;">
 <label for="boxcall" class="box_call"  data-iconpos="right">Call From Box</label>
-<input type="checkbox" name="boxall" id="boxcall" >
+<input type="checkbox" name="boxcall" id="boxcall" >
 </div>
 <!-- <div data-role="panel" id="settings-right-setting-panel" data-position="right" data-display="overlay" data-position-fixed="true" >
 <h2>Settings</h2>
