@@ -769,6 +769,31 @@ registernumberarray.push(data.numberlist);
 localStorage.setItem("registernumberarray", JSON.stringify(registernumberarray));
 localStorage.setItem("registernumberloaded", "Yes");
 console.log("registernumberarray stored in database");
+
+
+// below condition is setting the callerid  for the first time while loading
+for (var i in data.numberlist) {
+	console.log("regsiternumber " + data.numberlist[i].regdnumber);
+	if(data.numberlist[i].primnumber == 't'){
+		console.log("pageLogin Callerid that is set to true from database is :" + data.numberlist[i].regdnumber);
+	try {
+		localStorage.setItem("caller_id",data.numberlist[i].regdnumber );
+		console.log("Setting callerid that is set in database");
+		//alert("Callerid that is set in database");
+	}
+	catch (e) {
+		if (e == QUOTA_EXCEEDED_ERR) {
+			console.log("Error: Local Storage limit exceeds.");
+		}
+		else {
+			console.log("Error: Saving to local storage.");
+		}
+	}
+	}
+}
+
+
+
 }
 }
 catch (e) {
@@ -1120,10 +1145,13 @@ var opt = $("<option>");
 opt.attr("value",registernumber[i].regdnumber).text(registernumber[i].regdnumber);
 // check for previously set callerid
 var previouscallerid = localStorage.getItem("caller_id")
-if (previouscallerid != null && (previouscallerid == registernumber[i].regdnumber))
+if (previouscallerid != null && (previouscallerid == registernumber[i].regdnumber)){
 opt.attr("selected","selected");
-else if (registernumber[i].primnumber == 't' && previouscallerid === null) // this condition is if the select option is fill for frist time
+}
+else if (registernumber[i].primnumber == 't' && previouscallerid === null){// this condition is if the select option is fill for frist time
 opt.attr("selected","selected");
+localStorage.setItem("caller_id", registernumber[i].primnumber);
+}
 //opt.attr("value",registernumberarray[0].regdnumber[i]).text(registernumberarray[0].regdnumber[i]);
 $("#sel_register_num").append(opt);
 }
@@ -1145,12 +1173,7 @@ alert("Unable to get userid..\n. Please Reload the app");
 $(document).on('pagecreate', '#pageSettings', function(){
 console.log("Inside pageonesettings");
 console.log("Inside pageonesettings");
-document.addEventListener("deviceready", onPaddingHeader, false);
-function onPaddingHeader() {
-	if (parseFloat(window.device.version) === 7.0) {
-          document.body.style.marginTop = "20px";
-    }
-}
+
 console.log("Inside pageonesettings after deviceready ");
 $( "#sel_settings_register_num" ).change(function() {
 //alert("select event trriged");
@@ -1466,11 +1489,39 @@ calllogPlugin.createEvent(successCallback,errorCallback);
 //}// oncallloglist close
 });
 $(document).on('pagecreate', '#pageDialPad', function(){
+	
+// below code is for normal longhold
+ /**var mousepress_time = 1000;  
+ .on("mousedown", function () {
+            console.log("bt_clear mousedown");  // Remove this line
+            var $this = $(this);
+            $(this).data("checkdown", setTimeout(function () {
+                // Add your code to run
+              $('#dialednumber').val("");  // Remove this line
+            }, mousepress_time));
+        }).on("mouseup", function () {
+            clearTimeout($(this).data("checkdown"));
+            console.log("bt_clear mouseup");  // Remove this line
+        }).on("mouseout", function () {
+            clearTimeout($(this).data("checkdown"));
+            console.log("bt_clear mouseout");  // Remove this line
+        });
+**/
+	
+	
 document.addEventListener("deviceready", ondialed, false);
 function ondialed() {
 var dialednumber = null;
+
+//testing for longhold in dialpad
+$("#bt_clear").on("taphold", function() {
+	//alert("long hold");
+	 $('#dialednumber').val("");
+	 dialednumber = null;
+});
+
 $('#diallist').on('click', 'a', function(event){
-event.stopImmediatePropagation();
+//event.stopImmediatePropagation();
 event.preventDefault();
 var clickedval = $(this).attr('href');
 console.log("Dialed number is " + dialednumber);
@@ -1489,7 +1540,8 @@ $('#dialednumber').val(dialednumber);
 $('#dialednumber').val("");
 console.log("Dialed number after clear " + dialednumber);
 }
-else if (dialednumber !== null && !isNaN(clickedval)){
+//else if (dialednumber !== null && !isNaN(clickedval)){
+else if (dialednumber !== null && clickedval != "call"){
 dialednumber = dialednumber + clickedval;
 $('#dialednumber').val(dialednumber);
 }
@@ -1692,8 +1744,11 @@ if (previouscallerid != null && (previouscallerid == registernumber[i].regdnumbe
 console.log("previouscallerid condition satisfied");
 opt.attr("selected","selected");
 }	
-else if (registernumber[i].primnumber == 't' && previouscallerid === null) // this condition is if the select option is fill for frist time
+else if (registernumber[i].primnumber == 't' && previouscallerid === null){ // this condition is if the select option is fill for frist time
 opt.attr("selected","selected");
+localStorage.setItem("caller_id",registernumber[i].regdnumber);
+console.log("pagesettings setting the callerid in pageSettings show event");
+}
 //opt.attr("value",registernumberarray[0].regdnumber[i]).text(registernumberarray[0].regdnumber[i]);
 $("#sel_settings_register_num").append(opt);
 }
@@ -1702,6 +1757,8 @@ console.log("Number list updated");
 } else {
 alert("Unable populate the register number list from web storage.");
 }// else close for retriving number online
+
+/**
 var datastatus = checkConnection();
 //alert("settings: datastatus " + datastatus);
 if(datastatus == "0" || datastatus == "1"){
@@ -1718,6 +1775,9 @@ $("#internetstatus").val('on');
 $("#internetstatus").attr("disabled", "disabled");
 $("#internetstatus").slider('refresh');
 }
+
+**/
+
 var creditdetails = localStorage.getItem("credit_details")
 //alert("settings: creditdetails" + creditdetails);
 if(creditdetails != null ){
@@ -1809,9 +1869,9 @@ no need to add here as already added in pageshowevent
 }); // onpageSettings show close
 // Respond to back/forward navigation
 $( window ).on( "navigate", function( event, data ){
-/** if( data.state.direction == "back" ) {
+ if( data.state.direction == "back" ) {
 // Make use of the directional information
-if ($.mobile.activePage.attr("id") === "pageDirectCall") {
+if ($.mobile.activePage.attr("id") === "pageDialPad") {
 if(navigator.app){
 navigator.app.exitApp();
 }else if(navigator.device){
@@ -1824,7 +1884,7 @@ navigator.app.exitApp();
 navigator.device.exitApp();
 }
 }
-} **/
+} 
 });
 </script>
 </head>
@@ -1994,18 +2054,18 @@ navigator.device.exitApp();
 <select name="internetstatus" id="internetstatus" data-role="slider">
 <option style="font-size: 14px" value="off">Off</option>
 <option style="font-size: 14px" value="on">Active</option>
-</select> -->
+</select> 
 <div data-role="fieldcontain" >
 <div style="display: inline;">
-<label for="internetswitch" style="float:left; text-align:left;">Internet Status</label>
+<label for="internetswitch" style="float:left; ">Internet Status</label>
 <select name="internetstatus" id="internetstatus" data-role="slider" style="float:right;">
 <option style="font-size: 14px" value="off">Off</option>
 <option style="font-size: 14px" value="on">Active</option>
 </select>
 </div>
-</div>
+</div>-->
 <div data-role="fieldcontain" style="overflow: hidden;">
-<label for="Balance Details:" style="display: block; float:left; text-align:left;" >Balance Details</label>
+<label for="Balance Details:" style="display: block; float:left;" >Balance Details</label>
 <label id="creditdetails" style="display: block; float:right; ">0.00</label>
 </div>
 <div data-role="fieldcontain" style="overflow: hidden;">
@@ -2232,7 +2292,7 @@ navigator.device.exitApp();
 <li ><a href="7" data-role="tab" data-theme="a" class="ui-btn" style="line-height: 40px; font-size: large; margin: 1px;">7</a></li>
 <li ><a href="8" data-role="tab" data-theme="a" class="ui-btn" style="line-height: 40px; font-size: large; margin: 1px;">8</a></li>
 <li ><a href="9" data-role="tab" data-theme="a" class="ui-btn" style="line-height: 40px; font-size: large; margin: 1px;">9</a></li>
-<li ><a href="clear" data-role="tab" class="ui-btn" style="line-height: 40px; font-size: large; background-color: red; margin: 1px;">Clear</a></li>
+<li ><a href="clear" id="bt_clear" data-role="tab" class="ui-btn" style="line-height: 40px; font-size: large; background-color: red; margin: 1px;">Clear</a></li>
 <li ><a href="0" data-role="tab" data-theme="a" class="ui-btn" style="line-height: 40px; font-size: large; margin: 1px;">0</a></li>
 <li ><a href="call" data-role="tab" class="ui-btn" style="line-height: 40px; font-size: large; background-color: green; margin: 1px;">Call</a></li>
 </ul>
