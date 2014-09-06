@@ -808,6 +808,7 @@ console.log("printing domainslist length" + data.domainslist.length);
 if(data.domainslist.length >= 1){ // ie if the entered username belongs to more than one domains
 $.mobile.changePage($("#pageDomainDialog"), { transition : "slide"});
 console.log("Inside Length greater than two");
+$("#domainnamelist").empty();
 for(var i in data.domainslist){
 console.log("appending checkbox");
 console.log("value of i" + i);
